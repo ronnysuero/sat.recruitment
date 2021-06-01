@@ -32,8 +32,9 @@ namespace Sat.Recruitment.Api
             services.AddSingleton<IUserMemoryCache, UserMemoryCache>();
             services.AddAutoMapper(typeof(Startup));
 
-            var mapperConfig = new MapperConfiguration(mc => mc.AddProfile(new Domain.AutoMapper()));
-            services.AddSingleton(mapperConfig.CreateMapper());
+            services.AddSingleton(
+                new MapperConfiguration(mc => mc.AddProfile(new Domain.AutoMapper())).CreateMapper()
+            );
 
             services.AddProblemDetails(options =>
             {
